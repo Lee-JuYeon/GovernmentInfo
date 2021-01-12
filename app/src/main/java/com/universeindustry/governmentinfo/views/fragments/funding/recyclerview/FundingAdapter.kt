@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.R
-import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
 class FundingAdapter () : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 

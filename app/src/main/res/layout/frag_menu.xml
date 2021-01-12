@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <!--
+        Context, View 등 객체를 사용 할 때에는
+        <data> 태그 안에 객체를 import 해줘야한다. -->
+        <import type="android.view.View" />
+        <variable
+            name="menuVM"
+            type="com.universeindustry.governmentinfo.views.fragments.menu.MenuVM" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recyclerview">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</layout>

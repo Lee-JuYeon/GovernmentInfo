@@ -9,7 +9,7 @@
         <data> 태그 안에 객체를 import 해줘야한다. -->
         <import type="android.view.View" />
         <variable
-            name="viewmodel"
+            name="fundingVM"
             type="com.universeindustry.governmentinfo.views.fragments.funding.FundingVM" />
     </data>
     <LinearLayout
@@ -28,7 +28,7 @@
             android:id="@+id/funding_search"
             android:hint="@string/search_keyowrd"
             android:inputType="text"
-            android:text="@={viewmodel._currentText}"
+            android:text="@={fundingVM._currentText}"
             android:textAllCaps="false"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"

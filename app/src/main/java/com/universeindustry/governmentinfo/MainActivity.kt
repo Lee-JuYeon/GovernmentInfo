@@ -3,13 +3,14 @@ package com.universeindustry.governmentinfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.universeindustry.governmentinfo.databinding.ActivityMainBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.RetrofitManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.fragments.funding.FundingFragment
+import com.universeindustry.governmentinfo.views.fragments.menu.MenuFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,21 +23,25 @@ class MainActivity : AppCompatActivity() {
 
         // 테스트 쿼리 불러오는 곳입니다. 쿼리는 online-retrofit-API의 textQuery를 불러왔습니다.
         RetrofitManager.instance.testQuery(
-//                        searchTerm = "display=100&pageIndex=1",
                 searchTerm = API.mQuery,
                 completion = {
                     e("mException", it)
                 }
         )
-
-        getFragmentType(Strings.funding)
+        setMainVM()
     }
 
+    private val mainVM : MainViewModel by viewModels()
+    private lateinit var _menuFrag : MenuFragment
     private lateinit var _fundingFrag : FundingFragment
-    private fun getFragmentType(fragment : String){
-        try {
-            val manager = supportFragmentManager.beginTransaction()
-            when(fragment){
+    private fun setMainVM(){
+        val manager = supportFragmentManager.beginTransaction()
+        mainVM.setFragmentType.observe(this, Observer {
+            when(it){
+                Strings.menu -> {
+                    _menuFrag = MenuFragment()
+                    manager.replace(R.id.framelayout, _menuFrag).commit()
+                }
                 Strings.funding -> {
                     _fundingFrag = FundingFragment()
                     manager.replace(R.id.framelayout, _fundingFrag).commit()
@@ -57,15 +62,12 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 else -> {
-                    _fundingFrag = FundingFragment()
-                    manager.replace(R.id.framelayout, _fundingFrag).commit()
+                    _menuFrag = MenuFragment()
+                    manager.replace(R.id.framelayout, _menuFrag).commit()
                 }
             }
-        }catch (e:Exception){
-            e("mException", "MainActivity, getFragmentType // Exception : ${e.message}")
-        }
+        })
     }
-
 }
 /*
 back key 설정
