@@ -1,30 +1,28 @@
-package com.universeindustry.governmentinfo.views.fragments.funding
+package com.universeindustry.governmentinfo.views.fragments.menu
 
 import android.os.Bundle
-import android.util.Log
+import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.R
-import com.universeindustry.governmentinfo.databinding.FragFundingBinding
-import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingAdapter
+import com.universeindustry.governmentinfo.databinding.FragMenuBinding
+import com.universeindustry.governmentinfo.views.fragments.menu.recyclerview.MenuAdapter
 
-class FundingFragment : Fragment(){
-
-    private lateinit var binding: FragFundingBinding
+class MenuFragment : Fragment(){
+    private lateinit var binding: FragMenuBinding
     //----------------------------------------- 뷰 생성시  --------------------------------------------------------------------//
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         try {
-            binding = DataBindingUtil.inflate(inflater, R.layout.frag_funding, container, false)
+            binding = DataBindingUtil.inflate(inflater, R.layout.frag_menu, container, false)
         }catch (e:Exception){
-            Log.e("mException", "에러발생 -> FragmentFunding, onCreateView // Exception : ${e.message}")
+            e("mException", "에러발생 -> MenuFragment, onCreateView // Exception : ${e.message}")
         }finally {
             return binding.root
         }
@@ -34,38 +32,30 @@ class FundingFragment : Fragment(){
     private var recyclerView : RecyclerView? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         try {
-            recyclerView = binding.fundingRecyclerview
+            recyclerView = binding.recyclerview
             setRecyclerView(recyclerView!!)
-
         }catch (e:Exception){
-            Log.e(
-                "mException",
-                "에러발생 -> FragmentFunding, onViewCreated // Exception : ${e.message}"
-            )
+            e("mException", "에러발생 -> MenuFragment, onViewCreated // Exception : ${e.message}")
         }finally {
             super.onViewCreated(view, savedInstanceState)
         }
     }
 
     //----------------------------------------- 액티비티 생성 완료 시 --------------------------------------------------------------------//
-    private val _fundingVM : FundingVM by viewModels()
+    private val menuVM : MenuVM by viewModels()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         try {
             activity?.let {
                 binding.apply {
-                    fundingVM = _fundingVM
-                    lifecycleOwner = this@FundingFragment
+                    menuVM = menuVM
+                    lifecycleOwner = this@MenuFragment
                 }
-                _fundingVM.let {
-                    it._currentText.observe(context as LifecycleOwner, Observer {
-                    })
+                menuVM.let {
+
                 }
             }
         }catch (e:Exception){
-            Log.e(
-                "mException",
-                "에러발생 : FragmentFunding, onActivityCreated  // Exception : ${e.message}"
-            )
+            e("mException", "에러발생 : MenuFragment, onActivityCreated  // Exception : ${e.message}")
         }finally {
             super.onActivityCreated(savedInstanceState)
         }
@@ -73,22 +63,24 @@ class FundingFragment : Fragment(){
 
 
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//
-    private var fundingAdapter: FundingAdapter? = null
+    private var menuAdapter: MenuAdapter? = null
     fun setRecyclerView(get : RecyclerView){
         try {
-            fundingAdapter = FundingAdapter().apply {
+            menuAdapter = MenuAdapter().apply {
             }
 
             get.apply {
-                adapter = FundingAdapter()
-                layoutManager = LinearLayoutManager(context).apply {
+                adapter = MenuAdapter()
+                layoutManager = GridLayoutManager(context, 3).apply {
+                    orientation = LinearLayoutManager.VERTICAL
                     isItemPrefetchEnabled = false
                 }
                 setHasFixedSize(true)
                 setItemViewCacheSize(0)
             }
         }catch (e:Exception){
-            Log.e("mException", "FundingVM, setRecyclerView // Exception : ${e.message}")
+            e("mException", "MenuFragment, setRecyclerView // Exception : ${e.message}")
         }
     }
+
 }

@@ -3,8 +3,6 @@ package com.universeindustry.governmentinfo.views.fragments.funding
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
-import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingAdapter
 
 
 class FundingVM() : ViewModel() {
