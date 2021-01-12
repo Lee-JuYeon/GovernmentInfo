@@ -15,9 +15,9 @@ class RetrofitManager {
     private val iRetrofit : IRetrofit? = RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
 
-    // 사진 검색 api 호출
+    // 예제 쿼리입니다.
     fun testQuery(searchTerm: String?, completion: (String) -> Unit){
-        val call = iRetrofit?.testQuery(query = searchTerm ?: "") ?: return
+        val call = iRetrofit?.mTextQuery(query = searchTerm ?: "") ?: return
         call.enqueue(object : retrofit2.Callback<JsonElement>{
             // 응답 실패시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {

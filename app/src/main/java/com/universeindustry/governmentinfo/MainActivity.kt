@@ -20,9 +20,10 @@ class MainActivity : AppCompatActivity() {
         mainViewBind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainViewBind.root)
 
+        // 테스트 쿼리 불러오는 곳입니다. 쿼리는 online-retrofit-API의 textQuery를 불러왔습니다.
         RetrofitManager.instance.testQuery(
 //                        searchTerm = "display=100&pageIndex=1",
-                searchTerm = API.textQuery,
+                searchTerm = API.mQuery,
                 completion = {
                     e("mException", it)
                 }

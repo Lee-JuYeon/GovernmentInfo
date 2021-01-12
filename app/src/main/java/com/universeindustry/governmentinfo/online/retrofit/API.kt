@@ -2,5 +2,14 @@ package com.universeindustry.governmentinfo.online.retrofit
 
 object API{
     const val BASE_URL = "https://www.youthcenter.go.kr/opi/empList.do/"
-    const val textQuery = "pageIndex=10&display=10&bizTycdSel=004001,004002003"
+    // 테스트용 쿼리입니다. 제가 봤을 때는 쿼리 문제인 것 같은데, 제 딴에는 해당 쿼리가 옳은 것 같습니다.
+    const val mQuery = "pageIndex=10&display=10&bizTycdSel=004001,004002003"
+
+    /*
+    혹시 아이디가 없으실까 제 아이디와 비밀번호 남겨둡니다.
+
+    온라인 청년 센터
+    아이디 : nonslowly1594
+    비밀번호 : TKREKajrdjqhwk!)1928
+     */
 }

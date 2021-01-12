@@ -11,12 +11,10 @@ interface IRetrofit {
                                 [   GET    ]     [@Query]="${query}"
      https://www.unsplash.com/  search/photo  /  ?query  ="        "
      */
-    @GET("/{query}")
-    fun testQuery(@Query("query") query : String) : Call<JsonElement>
 
-
-//    @GET("{MODEL}/xml/")
-//    fun getSourceByXML(@Path("query") MODEL : String) : Call<EventModel>
+    // 테스트 쿼리입니다.
+    @GET("{query}")
+    fun mTextQuery(@Query("query") query : String) : Call<JsonElement>
 
 }
 
