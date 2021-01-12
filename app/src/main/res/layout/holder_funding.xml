@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="adapter"
+            type="com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingAdapter" />
+        <variable
+            name="fundingModel"
+            type="com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/background"
+        android:onClick="@{() -> adapter.setInFun(fundingModel.title)}">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorBlack"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/background_rect">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:src="@{fundingModel.image}"
+                android:scaleType="centerInside"
+                android:id="@+id/image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/image"
+                android:layout_alignParentTop="true"
+                android:text="@{fundingModel.title}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/notosans_semicondensed_extrabold"
+                android:padding="2dp"
+                android:gravity="center"
+                android:id="@+id/title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/image"
+                android:layout_below="@id/title"
+                android:text="@{fundingModel.date}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_semicondensed_semibold"
+                android:padding="2dp"
+                android:gravity="center"
+                android:id="@+id/date"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/image"
+                android:layout_below="@id/date"
+                android:text="@{fundingModel.money}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_semicondensed_semibold"
+                android:padding="2dp"
+                android:gravity="center"
+                android:id="@+id/money"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@{fundingModel.option}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_semicondensed_semibold"
+                android:padding="2dp"
+                android:gravity="center"
+                android:id="@+id/option"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">청년 정보</string>
+
+    <string name="imageLoading">불러오는 중....</string>
+    <string name="sample_text_1">Everything is possible for him who believes</string>
+    <string name="sample_text_2">The LORD your God will be with you wherever</string>
+
+    <string name="search_keyowrd">키워드를 입력해주세요</string>
+</resources>
