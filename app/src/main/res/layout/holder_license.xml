@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="licenseModel"
+            type="com.universeindustry.governmentinfo.views.fragments.license.LicenseModel" />
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/background_all_radius">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/title"
+            android:text="@{licenseModel.title}"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/notosans_semicondensed_extrabold"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:id="@+id/practicalTestDate"
+            android:text="@{licenseModel.practicalTestDate.values().toString()}"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            android:fontFamily="@font/notosans_semicondensed_semibold"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/practicalTestDate"
+            android:id="@+id/writtenTestDate"
+            android:text="@{licenseModel.writeenTestDate.values().toString()}"
+            android:textColor="@color/colorBlack"
+            android:textSize="17sp"
+            android:fontFamily="@font/notosans_semicondensed_semibold"/>
+    </RelativeLayout>
+</layout>

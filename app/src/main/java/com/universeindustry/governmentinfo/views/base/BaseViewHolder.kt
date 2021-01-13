@@ -14,15 +14,16 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.BR
 import com.universeindustry.governmentinfo.views.fragments.menu.recyclerview.MenuModel
+import java.util.*
 
 
-abstract class BaseViewHolder<in Model : Any>(
+abstract class BaseViewHolder<in Model : Objects>(
         private val BR : Int,
         private val holderBinding : ViewDataBinding
 ) : RecyclerView.ViewHolder(holderBinding.root) {
 
 
-    fun onBindViewHolder(model : Any){
+    fun onBindViewHolder(model : Objects){
         try {
 //            onViewCreated(model)
             holderBinding.apply {

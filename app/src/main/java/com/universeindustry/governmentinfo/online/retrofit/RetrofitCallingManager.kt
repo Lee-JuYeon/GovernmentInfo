@@ -5,14 +5,14 @@ import com.google.gson.JsonElement
 import retrofit2.Call
 import retrofit2.Response
 
-class RetrofitManager {
+class RetrofitCallingManager {
 
     companion object {
-        val instance = RetrofitManager()
+        val instance = RetrofitCallingManager()
     }
 
     // 레트로핏 인터페이스 가져오기
-    private val iRetrofit : IRetrofit? = RetrofitClient.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
+    private val iRetrofit : IRetrofit? = RetrofitCreater.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
 
 
     // 예제 쿼리입니다.
