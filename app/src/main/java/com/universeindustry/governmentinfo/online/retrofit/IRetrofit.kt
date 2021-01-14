@@ -16,6 +16,9 @@ interface IRetrofit {
     @GET("{query}")
     fun mTextQuery(@Query("query") query : String) : Call<JsonElement>
 
+    // 국가자격증 종목
+    @GET("getList?")
+    fun getLicenseTItles(@Query("serviceKey") query : String) : Call<JsonElement>
 }
 
 /*

@@ -6,3 +6,8 @@ data class LicenseModel(
     val writeenTestDate : HashMap<String, String>?,
     val practicalTestDate : HashMap<String, String>?
 )
+//{
+//    override fun toString(): String {
+//        return super.toString()
+//    }
+//}

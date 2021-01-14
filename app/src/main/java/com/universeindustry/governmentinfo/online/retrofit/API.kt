@@ -1,5 +1,8 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
+import com.universeindustry.governmentinfo.utils.datatype.TypeConverting.toDecodedURL
+import com.universeindustry.governmentinfo.utils.datatype.TypeConverting.toURL
+
 object API{
     //--------------------- 온라인 청년 센터 api-----------------------------------//
     const val BASE_URL = "https://www.youthcenter.go.kr/opi/empList.do/"
@@ -7,6 +10,9 @@ object API{
     const val mQuery = "pageIndex=10&display=10&bizTycdSel=004001,004002003"
 
     //--------------------- 국가자격증 리스트 api-----------------------------------//
-    const val licenseListAuthKey = "gGT6JpsCofvcQAcIlBMe3yiOlc%2F%2B9RQn02Y3f7KAqISpINN0U5gUrEIZY4QhLOkZtUI1VGthBSRxSIWpG77lNg%3D%3D"
-    const val licenseListURL = "http://openapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/getList"
+    val licenseListAuthKey = "0M7LP9tjMbQFDvl0pXyQGtQXku4zclBZV0nhZiMR9j7oMdSEWZR2ubH7eBo8dy0dPYWeQ9ustmtuWf5oK79ybg%3D%3D"
+//                    .toDecodedURL()
+//            .toURL()
+//    const val licenseListURL = "http://openapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/"
+    const val licenseListURLTest = "http://testapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/"
 }

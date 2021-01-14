@@ -12,7 +12,7 @@ class RetrofitCallingManager {
     }
 
     // 레트로핏 인터페이스 가져오기
-    private val iRetrofit : IRetrofit? = RetrofitCreater.getClient(API.BASE_URL)?.create(IRetrofit::class.java)
+    private val iRetrofit : IRetrofit? = RetrofitCreater.getClient(API.licenseListURLTest)?.create(IRetrofit::class.java)
 
 
     // 예제 쿼리입니다.
@@ -21,13 +21,30 @@ class RetrofitCallingManager {
         call.enqueue(object : retrofit2.Callback<JsonElement>{
             // 응답 실패시
             override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-                Log.e("mException", "RetrofitManager, call, onFailure() called / t: $t")
+                Log.e("mException", "에러발생 -> RetrofitManager, call, onFailure() called / t: $t")
                 completion( t.toString())
             }
 
             // 응답 성공시
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                Log.e("mException", "RetrofitManager, call, onResponse() called / response : ${response.body()}")
+                Log.e("mException", "응답성공 -> RetrofitManager, call, onResponse() called / response : ${response.body()}")
+                completion(response.raw().toString())
+            }
+        })
+    }
+
+    fun setQuery(query : String, completion : (String) -> Unit){
+        val call = iRetrofit?.getLicenseTItles(
+//                query = API.licenseListAuthKey
+                query = query
+        ) ?: return
+        call.enqueue(object : retrofit2.Callback<JsonElement>{
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                Log.e("mException", "에러발생 -> RetrofitCallingManager, setQuery, onFailure() called // t: $t")
+                completion( t.toString())
+            }
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                Log.e("mException", "응답성공 -> RetrofitCallingManager, setQuery, onResponse() called // response : ${response.body()}")
                 completion(response.raw().toString())
             }
         })

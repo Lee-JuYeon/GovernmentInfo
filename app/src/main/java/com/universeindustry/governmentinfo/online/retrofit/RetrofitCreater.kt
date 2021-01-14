@@ -68,7 +68,7 @@ object RetrofitCreater {
                         try {
                             e("mException", JSONObject(message).toString(4))
                         } catch (e: Exception) {
-                            e("mException", message)
+                            e("mException", "Exception : ${message}")
                         }
                     }
                 }

@@ -2,9 +2,11 @@ package com.universeindustry.governmentinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log.e
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.universeindustry.governmentinfo.databinding.ActivityMainBinding
+import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.fragments.funding.FundingFragment
@@ -27,7 +29,13 @@ class MainActivity : AppCompatActivity() {
 //                    e("mException", it)
 //                }
 //        )
-        
+
+        RetrofitCallingManager.instance.setQuery(
+                query = API.licenseListAuthKey,
+                completion = {
+                    e("mException", " completion : ${it} ")
+                }
+        )
         setMainVM()
 
         mainViewBind.banner.setOnClickListener {
