@@ -64,11 +64,15 @@ object RetrofitCreater {
                 when {
                     message.isJsonObject() -> e("mException", JSONObject(message).toString(4))
                     message.isJsonArray() -> e("mException", JSONObject(message).toString(4))
+                    message is String -> {
+                        e("mException", "${message}")
+                    }
                     else -> {
                         try {
                             e("mException", JSONObject(message).toString(4))
                         } catch (e: Exception) {
-                            e("mException", "Exception : ${message}")
+                            e("mException", "에러발생 -> Exception : ${message}")
+                            e("mException", "에러발생 -> RetrofitCreater, setLoggingInterecepter // Exception : ${e.message}")
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
 import com.google.gson.JsonElement
+import com.universeindustry.governmentinfo.online.retrofit.models.LicenseBodyModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,7 +19,7 @@ interface IRetrofit {
 
     // 국가자격증 종목
     @GET("getList?")
-    fun getLicenseTItles(@Query("serviceKey") query : String) : Call<JsonElement>
+    fun getLicenseTItles(@Query("serviceKey") query : String) : Call<LicenseBodyModel>
 }
 
 /*

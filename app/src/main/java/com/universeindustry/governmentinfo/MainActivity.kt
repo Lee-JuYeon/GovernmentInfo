@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
 //                }
 //        )
 
-        RetrofitCallingManager.instance.setQuery(
-                query = API.licenseListAuthKey,
+        RetrofitCallingManager.instance.getLicenseList(
                 completion = {
                     e("mException", " completion : ${it} ")
                 }

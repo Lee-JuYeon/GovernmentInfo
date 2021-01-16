@@ -17,7 +17,7 @@ class MenuAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         ),
         MenuModel(
             image = R.drawable.image_license,
-            title = "국가 기술 자격증"
+            title = "국가 자격증"
         )
     )
 
