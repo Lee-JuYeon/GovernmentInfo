@@ -28,15 +28,15 @@ object RetrofitCreater {
                 // retrofit 빌더를 통해 인스턴스 생성
                 retrofitClient = Retrofit.Builder()
                         .baseUrl(baseUrl)
-//                        .addConverterFactory(SimpleXmlConverterFactory.create())
-                        .addConverterFactory(
-                                TikXmlConverterFactory.create(
-                                        TikXml.Builder()
-                                                .exceptionOnUnreadXml(false)
-                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
-                                                .build()
-                                )
-                        )
+                        .addConverterFactory(SimpleXmlConverterFactory.create())
+//                        .addConverterFactory(
+//                                TikXmlConverterFactory.create(
+//                                        TikXml.Builder()
+//                                                .exceptionOnUnreadXml(false)
+//                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
+//                                                .build()
+//                                )
+//                        )
                         .client(client.build())
                         .build()
             }

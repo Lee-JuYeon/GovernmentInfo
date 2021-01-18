@@ -6,7 +6,6 @@ import android.util.Log.e
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.universeindustry.governmentinfo.databinding.ActivityMainBinding
-import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.fragments.funding.FundingFragment

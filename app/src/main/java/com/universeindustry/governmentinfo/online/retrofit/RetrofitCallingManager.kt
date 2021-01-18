@@ -1,11 +1,15 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
-import android.util.Log
 import android.util.Log.e
-import com.google.gson.JsonElement
 import com.universeindustry.governmentinfo.online.retrofit.model.Items
 import retrofit2.Call
 import retrofit2.Response
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
 
 class RetrofitCallingManager {
 
