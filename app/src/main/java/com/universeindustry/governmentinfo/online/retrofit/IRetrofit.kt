@@ -1,9 +1,9 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
 import com.google.gson.JsonElement
+import com.universeindustry.governmentinfo.online.retrofit.model.Items
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface IRetrofit {
@@ -16,6 +16,9 @@ interface IRetrofit {
     @GET("{query}")
     fun mTextQuery(@Query("query") query : String) : Call<JsonElement>
 
+    // 국가자격증 종목
+    @GET("getList?")
+    fun getLicenseTItles(@Query("serviceKey") query : String) : Call<Items>
 }
 
 /*

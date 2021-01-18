@@ -1,7 +1,7 @@
-package com.universeindustry.governmentinfo.views.fragments.menu
+package com.universeindustry.governmentinfo.views.fragments.license
+
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
@@ -9,22 +9,20 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.R
-import com.universeindustry.governmentinfo.databinding.FragMenuBinding
-import com.universeindustry.governmentinfo.views.fragments.menu.recyclerview.MenuAdapter
+import com.universeindustry.governmentinfo.databinding.FragLicenseBinding
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
-class MenuFragment : Fragment(){
-    private lateinit var binding: FragMenuBinding
+class LicenseFragment : Fragment(){
+    private lateinit var binding: FragLicenseBinding
     //----------------------------------------- 뷰 생성시  --------------------------------------------------------------------//
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         try {
-            binding = DataBindingUtil.inflate(inflater, R.layout.frag_menu, container, false)
+            binding = DataBindingUtil.inflate(inflater, R.layout.frag_license, container, false)
         }catch (e:Exception){
-            e("mException", "에러발생 -> MenuFragment, onCreateView // Exception : ${e.message}")
+            e("mException", "에러발생 -> LicenseFragment, onCreateView // Exception : ${e.message}")
         }finally {
             return binding.root
         }
@@ -37,27 +35,27 @@ class MenuFragment : Fragment(){
             recyclerView = binding.recyclerview
             setRecyclerView(recyclerView!!)
         }catch (e:Exception){
-            e("mException", "에러발생 -> MenuFragment, onViewCreated // Exception : ${e.message}")
+            e("mException", "에러발생 -> LicenseFragment, onViewCreated // Exception : ${e.message}")
         }finally {
             super.onViewCreated(view, savedInstanceState)
         }
     }
 
     //----------------------------------------- 액티비티 생성 완료 시 --------------------------------------------------------------------//
-    private val menuVM : MenuVM by viewModels()
+    private val licenseVM : LicenseVM by viewModels()
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         try {
             activity?.let {
                 binding.apply {
-                    menuVM = menuVM
-                    lifecycleOwner = this@MenuFragment
+                    licenseVM = licenseVM
+                    lifecycleOwner = this@LicenseFragment
                 }
-                menuVM.let {
+                licenseVM.let {
 
                 }
             }
         }catch (e:Exception){
-            e("mException", "에러발생 : MenuFragment, onActivityCreated  // Exception : ${e.message}")
+            e("mException", "에러발생 : LicenseFragment, onActivityCreated  // Exception : ${e.message}")
         }finally {
             super.onActivityCreated(savedInstanceState)
         }
@@ -65,24 +63,24 @@ class MenuFragment : Fragment(){
 
 
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//
-    private var menuAdapter: MenuAdapter? = null
-    private var menuClick : IClickListener? = null
+    private var licenseAdapter: LicenseAdapter? = null
+    private var licenseClick : IClickListener? = null
     fun setRecyclerView(get : RecyclerView){
         try {
-            menuClick = object : IClickListener{
+            licenseClick = object : IClickListener{
                 override fun onClick(listValueString: Any?) {
                     e("mException", "눌린 것 : ${listValueString as String}")
                     e("mException", "눌")
                 }
             }
 
-            menuAdapter = MenuAdapter().apply {
-                setClickListener(menuClick!!)
+            licenseAdapter = LicenseAdapter().apply {
+                setClickListener(licenseClick!!)
             }
 
             get.apply {
-                adapter = MenuAdapter()
-                layoutManager = GridLayoutManager(context, 2).apply {
+                adapter = LicenseAdapter()
+                layoutManager = LinearLayoutManager(context).apply {
                     orientation = LinearLayoutManager.VERTICAL
                     isItemPrefetchEnabled = false
                 }
@@ -90,7 +88,7 @@ class MenuFragment : Fragment(){
                 setItemViewCacheSize(0)
             }
         }catch (e:Exception){
-            e("mException", "MenuFragment, setRecyclerView // Exception : ${e.message}")
+            e("mException", "LicenseFragment, setRecyclerView // Exception : ${e.message}")
         }
     }
 

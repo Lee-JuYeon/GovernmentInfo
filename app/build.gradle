@@ -67,12 +67,18 @@ dependencies {
 
     // Retrofit 2.0
     def retrofit_LatestVersion = "2.8.1"
+    def logging_intercepter_latestVersion = "4.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_LatestVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_LatestVersion"
     implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_LatestVersion"
-
-    def logging_intercepter_latestVersion = "4.9.0"
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_intercepter_latestVersion"
+
+    implementation 'com.tickaroo.tikxml:retrofit-converter:0.8.13'
+
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    kapt 'com.tickaroo.tikxml:processor:0.8.13'
+    implementation 'com.tickaroo.tikxml:converter-htmlescape:0.8.13'
 
     //stetho
     implementation 'com.facebook.stetho:stetho:1.5.1'

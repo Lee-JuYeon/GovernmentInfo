@@ -3,7 +3,7 @@ package com.universeindustry.governmentinfo.utils.extensions
 object Strings {
     val menu : String = "메인뷰"
     val funding : String = "지원금"
-    val career : String = "스펙, 자격증"
+    val license : String = "스펙, 자격증"
     val medical : String = "의료보험"
     val jobSearching : String = "구인구직"
     val realEstate : String = "주거"
