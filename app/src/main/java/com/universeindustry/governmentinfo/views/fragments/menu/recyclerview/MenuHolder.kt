@@ -11,7 +11,7 @@ import java.io.File
 
 class MenuHolder(
     private val holderBinding: HolderMenuBinding,
-    private val iClickListener: IClickListener?
+    private val iClickListener: IClickListener
 ) : RecyclerView.ViewHolder(holderBinding.root){
     fun dataBinding(model : MenuModel?){
         holderBinding.apply {
@@ -21,11 +21,11 @@ class MenuHolder(
     }
 
     init {
-        holderBinding.text.apply {
+        holderBinding.background.apply {
             setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION){
                     try {
-                        iClickListener?.onClick("${this.text}")
+                        iClickListener.onClick(adapterPosition,"${holderBinding.text.text}")
                     }catch (e:Exception){
                         e("mException", "에러발생 -> MenuHolder, init, setOnClickListener // Exception : ${e.message}")
                     }

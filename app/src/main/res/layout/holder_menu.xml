@@ -12,12 +12,14 @@
         android:layout_height="200dp"
         android:background="@drawable/background_all_radius"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:id="@+id/background">
         <ImageView
             app:imageResource="@{menuModel.image}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
+            android:padding="5dp"
             android:id="@+id/image"
             android:scaleType="centerInside"
             android:contentDescription="@string/imageLoading">

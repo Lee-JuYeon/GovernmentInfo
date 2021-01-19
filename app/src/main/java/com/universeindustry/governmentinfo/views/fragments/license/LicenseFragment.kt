@@ -68,9 +68,8 @@ class LicenseFragment : Fragment(){
     fun setRecyclerView(get : RecyclerView){
         try {
             licenseClick = object : IClickListener{
-                override fun onClick(listValueString: Any?) {
+                override fun onClick(position : Int, listValueString: Any?) {
                     e("mException", "눌린 것 : ${listValueString as String}")
-                    e("mException", "눌")
                 }
             }
 
@@ -79,7 +78,7 @@ class LicenseFragment : Fragment(){
             }
 
             get.apply {
-                adapter = LicenseAdapter()
+                adapter = licenseAdapter
                 layoutManager = LinearLayoutManager(context).apply {
                     orientation = LinearLayoutManager.VERTICAL
                     isItemPrefetchEnabled = false
@@ -91,5 +90,4 @@ class LicenseFragment : Fragment(){
             e("mException", "LicenseFragment, setRecyclerView // Exception : ${e.message}")
         }
     }
-
 }

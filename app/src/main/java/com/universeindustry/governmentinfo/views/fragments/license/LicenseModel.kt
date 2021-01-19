@@ -12,7 +12,7 @@ data class LicenseModel(
         val examFee : String?,
         val writeenTestDate : HashMap<String, String>?,
         val practicalTestDate : HashMap<String, String>?
-) : Serializable
+)
 //{
 //    override fun toString(): String {
 //        return super.toString()

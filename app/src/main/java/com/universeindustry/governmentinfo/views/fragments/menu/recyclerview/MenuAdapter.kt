@@ -8,26 +8,38 @@ import com.universeindustry.governmentinfo.databinding.HolderMenuBinding
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
 
-class MenuAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MenuAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val menuList = arrayListOf(
         MenuModel(
-            image = R.drawable.image_bank,
+            image = R.drawable.image_coins,
             title = "지원금"
         ),
         MenuModel(
             image = R.drawable.image_license,
             title = "국가 자격증"
+        ),
+        MenuModel(
+            image = R.drawable.image_home,
+            title = "주거"
+        ),
+        MenuModel(
+            image = R.drawable.image_bank,
+            title = "은행"
+        ),
+        MenuModel(
+            image = R.drawable.image_injection,
+            title = "예방 접종"
         )
     )
 
     private var iClickListener : IClickListener? = null
-    fun setClickListener(get : IClickListener?){ this.iClickListener = get }
+    fun setClickListener(get : IClickListener){ this.iClickListener = get }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val dataBindingUtil = HolderMenuBinding.inflate(layoutInflater, parent, false)
-        return  MenuHolder(dataBindingUtil, iClickListener)
+        return  MenuHolder(dataBindingUtil, iClickListener!!)
     }
     override fun getItemCount(): Int = menuList.size
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

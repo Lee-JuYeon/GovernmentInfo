@@ -12,8 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.universeindustry.governmentinfo.MainActivity
 import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragMenuBinding
+import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.fragments.menu.recyclerview.MenuAdapter
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
@@ -70,9 +72,9 @@ class MenuFragment : Fragment(){
     fun setRecyclerView(get : RecyclerView){
         try {
             menuClick = object : IClickListener{
-                override fun onClick(listValueString: Any?) {
-                    e("mException", "눌린 것 : ${listValueString as String}")
-                    e("mException", "눌")
+                override fun onClick(position : Int, listValueString: Any?) {
+                    e("mException", "${position}, ${listValueString}")
+                    (activity as MainActivity).mainVM.setFragmentType(Strings.license)
                 }
             }
 
@@ -81,7 +83,7 @@ class MenuFragment : Fragment(){
             }
 
             get.apply {
-                adapter = MenuAdapter()
+                adapter = menuAdapter
                 layoutManager = GridLayoutManager(context, 2).apply {
                     orientation = LinearLayoutManager.VERTICAL
                     isItemPrefetchEnabled = false
