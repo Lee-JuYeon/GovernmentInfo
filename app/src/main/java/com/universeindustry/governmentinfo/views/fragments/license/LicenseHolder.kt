@@ -1,6 +1,6 @@
 package com.universeindustry.governmentinfo.views.fragments.license
 
-import android.util.Log
+import android.util.Log.e
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.BR
 import com.universeindustry.governmentinfo.databinding.HolderLicenseBinding
@@ -18,6 +18,16 @@ class LicenseHolder(
     }
 
     init {
-
+        holderBinding.background.apply {
+            setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION){
+                    try {
+                        iClickListener?.onClick(adapterPosition,"${holderBinding.title.text}")
+                    }catch (e:Exception){
+                        e("mException", "에러발생 -> LicenseHolder, init, setOnClickListener // Exception : ${e.message}")
+                    }
+                }
+            }
+        }
     }
 }

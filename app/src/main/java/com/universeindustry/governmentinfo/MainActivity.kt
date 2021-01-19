@@ -28,20 +28,17 @@ class MainActivity : AppCompatActivity() {
 //                    e("mException", it)
 //                }
 //        )
-
-        RetrofitCallingManager.instance.getLicenseList(
-                completion = {
-                    e("mException", " completion : ${it} ")
-                }
-        )
+//
+//        RetrofitCallingManager.instance.getLicenseList(
+//                completion = {
+//                    e("mException", " completion : ${it} ")
+//                }
+//        )
         setMainVM()
 
-        mainViewBind.banner.setOnClickListener {
-            mainVM.setFragmentType(Strings.license)
-        }
     }
 
-    private val mainVM : MainViewModel by viewModels()
+    val mainVM : MainViewModel by viewModels()
     private lateinit var _menuFrag : MenuFragment
     private lateinit var _fundingFrag : FundingFragment
     private lateinit var _licenseFrag : LicenseFragment
