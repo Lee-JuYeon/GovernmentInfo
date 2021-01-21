@@ -22,7 +22,7 @@ class FundingHolder(
             setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION){
                     try {
-                        iClickListener.onClick(adapterPosition,"${holderBinding.title}")
+                        iClickListener.onClick(adapterPosition,"${holderBinding.title.text}")
                     }catch (e:Exception){
                         e("mException", "에러발생 -> FundingHolder, init, setOnClickListener // Exception : ${e.message}")
                     }
