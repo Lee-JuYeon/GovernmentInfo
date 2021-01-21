@@ -5,7 +5,7 @@
     <data>
         <variable
             name="licenseModel"
-            type="com.universeindustry.governmentinfo.views.fragments.license.LicenseModel" />
+            type="com.universeindustry.governmentinfo.views.fragments.license.recyclerview.LicenseModel" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"

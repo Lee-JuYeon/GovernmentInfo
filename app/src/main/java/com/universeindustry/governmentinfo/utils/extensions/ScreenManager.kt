@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
+
 
 object ScreenManager {
     fun Float.toPx(context: Context) = (this * context.resources.displayMetrics.scaledDensity + 0.5F)
@@ -27,5 +29,13 @@ object ScreenManager {
         val drawable = ContextCompat.getDrawable(context, image)
         val bitmap = (drawable as BitmapDrawable).bitmap
         return BitmapDrawable(context.resources, Bitmap.createScaledBitmap(bitmap, width, height, true))
+    }
+
+    fun convertDpToPixel(dp: Float, context: Context): Float {
+        return dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+    }
+
+    fun convertPixelsToDp(px: Float, context: Context): Float {
+        return px / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
     }
 }

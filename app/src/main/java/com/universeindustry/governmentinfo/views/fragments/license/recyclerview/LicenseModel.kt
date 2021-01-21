@@ -1,4 +1,4 @@
-package com.universeindustry.governmentinfo.views.fragments.license
+package com.universeindustry.governmentinfo.views.fragments.license.recyclerview
 
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
