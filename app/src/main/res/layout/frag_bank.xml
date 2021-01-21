@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <!--
+        Context, View 등 객체를 사용 할 때에는
+        <data> 태그 안에 객체를 import 해줘야한다. -->
+        <import type="android.view.View" />
+        <variable
+            name="bankVM"
+            type="com.universeindustry.governmentinfo.views.fragments.bank.BankVM" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:padding="10dp"
+            android:background="@drawable/background_all_radius"
+            android:id="@+id/search"
+            android:hint="@string/search_keyowrd"
+            android:inputType="text"
+            android:text="@={bankVM._currentText}"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosans_semicondensed_semibold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:importantForAutofill="no">
+        </EditText>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="1dp"
+            android:id="@+id/recyclerview">
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</layout>

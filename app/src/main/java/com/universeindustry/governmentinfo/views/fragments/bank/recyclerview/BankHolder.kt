@@ -1,18 +1,18 @@
-package com.universeindustry.governmentinfo.views.fragments.funding.recyclerview
+package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview
 
-import android.util.Log.e
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.BR
-import com.universeindustry.governmentinfo.databinding.HolderFundingBinding
+import com.universeindustry.governmentinfo.databinding.HolderBankBinding
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
-class FundingHolder(
-        private val holderBinding : HolderFundingBinding,
+class BankHolder(
+        private val holderBinding: HolderBankBinding,
         private val iClickListener: IClickListener
 ) : RecyclerView.ViewHolder(holderBinding.root){
     fun dataBinding(model : Any?){
         holderBinding.apply {
-            setVariable(BR.fundingModel, model as FundingModel)
+            setVariable(BR.bankModel, model as BankModel)
             executePendingBindings()
         }
     }
@@ -24,7 +24,7 @@ class FundingHolder(
                     try {
                         iClickListener.onClick(adapterPosition,"${holderBinding.title}")
                     }catch (e:Exception){
-                        e("mException", "에러발생 -> FundingHolder, init, setOnClickListener // Exception : ${e.message}")
+                        Log.e("mException", "에러발생 -> BankHolder, init, setOnClickListener // Exception : ${e.message}")
                     }
                 }
             }

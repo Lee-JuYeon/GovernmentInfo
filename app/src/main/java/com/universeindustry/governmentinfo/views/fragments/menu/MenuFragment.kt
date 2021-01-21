@@ -1,7 +1,6 @@
 package com.universeindustry.governmentinfo.views.fragments.menu
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
@@ -73,8 +72,15 @@ class MenuFragment : Fragment(){
         try {
             menuClick = object : IClickListener{
                 override fun onClick(position : Int, listValueString: Any?) {
-                    e("mException", "${position}, ${listValueString}")
-                    (activity as MainActivity).mainVM.setFragmentType(Strings.license)
+                    if (listValueString is String){
+                        when(listValueString){
+                            Strings.funding -> (activity as MainActivity).mainVM.setFragmentType(Strings.funding)
+                            Strings.license -> (activity as MainActivity).mainVM.setFragmentType(Strings.license)
+                            Strings.bank -> (activity as MainActivity).mainVM.setFragmentType(Strings.bank)
+//                            "주거" -> (activity as MainActivity).mainVM.setFragmentType(Strings.license)
+//                            "예방 접종" -> (activity as MainActivity).mainVM.setFragmentType(Strings.license)
+                        }
+                    }
                 }
             }
 

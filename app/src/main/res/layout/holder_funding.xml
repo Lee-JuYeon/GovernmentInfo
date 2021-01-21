@@ -6,9 +6,6 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="fundingAdapter"
-            type="com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingAdapter" />
-        <variable
             name="fundingModel"
             type="com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel" />
     </data>
@@ -18,8 +15,7 @@
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:id="@+id/background"
-        android:onClick="@{() -> fundingAdapter.setInFun(fundingModel.title)}">
+        android:id="@+id/background">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

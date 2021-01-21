@@ -1,4 +1,4 @@
-package com.universeindustry.governmentinfo.views.fragments.license
+package com.universeindustry.governmentinfo.views.fragments.license.recyclerview
 
 import android.util.Log.e
 import androidx.recyclerview.widget.RecyclerView
@@ -10,9 +10,9 @@ class LicenseHolder(
     private val holderBinding: HolderLicenseBinding,
     private val iClickListener: IClickListener?
 ) : RecyclerView.ViewHolder(holderBinding.root){
-    fun dataBinding(model : LicenseModel?){
+    fun dataBinding(model : Any?){
         holderBinding.apply {
-            setVariable(BR.licenseModel, model)
+            setVariable(BR.licenseModel, model as LicenseModel)
             executePendingBindings()
         }
     }

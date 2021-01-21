@@ -2,15 +2,12 @@ package com.universeindustry.governmentinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.e
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.universeindustry.governmentinfo.databinding.ActivityMainBinding
-import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
-import com.universeindustry.governmentinfo.views.fragments.funding.FundingFragment
-import com.universeindustry.governmentinfo.views.fragments.license.LicenseFragment
 import com.universeindustry.governmentinfo.views.fragments.menu.MenuFragment
+import com.universeindustry.governmentinfo.views.fragments.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     val mainVM : MainViewModel by viewModels()
     private lateinit var _menuFrag : MenuFragment
-    private lateinit var _fundingFrag : FundingFragment
-    private lateinit var _licenseFrag : LicenseFragment
+    private var _searchFrag : SearchFragment? = null
     private fun setMainVM(){
         mainVM.getFragmentType.observe(this, Observer {
             val manager = supportFragmentManager.beginTransaction()
@@ -53,27 +49,27 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
                 Strings.funding -> {
-                    _fundingFrag = FundingFragment()
-                    manager.replace(R.id.framelayout, _fundingFrag)
-//                        .addToBackStack(null)
+                    if (_searchFrag == null) _searchFrag = SearchFragment()
+                    _searchFrag = SearchFragment()
+                    manager.replace(R.id.framelayout, _searchFrag!!)
                         .commit()
                 }
                 Strings.license -> {
-                    _licenseFrag = LicenseFragment()
-                    manager.replace(R.id.framelayout, _licenseFrag)
-//                        .addToBackStack(null)
-                        .commit()
+                    if (_searchFrag == null) _searchFrag = SearchFragment()
+                    _searchFrag = SearchFragment()
+                    manager.replace(R.id.framelayout, _searchFrag!!)
+                            .commit()
                 }
-                Strings.medical -> {
+                Strings.bank -> {
+                    if (_searchFrag == null) _searchFrag = SearchFragment()
+                    _searchFrag = SearchFragment()
+                    manager.replace(R.id.framelayout, _searchFrag!!)
+                            .commit()
+                }
+                Strings.vaccine -> {
 
                 }
-                Strings.jobSearching -> {
-
-                }
-                Strings.realEstate -> {
-
-                }
-                Strings.banking -> {
+                Strings.house -> {
 
                 }
                 else -> {
