@@ -80,14 +80,6 @@ object RetrofitCreater {
                         retrofitClient = Retrofit.Builder()
                                 .baseUrl(baseUrl)
                                 .addConverterFactory(SimpleXmlConverterFactory.create())
-//                        .addConverterFactory(
-//                                TikXmlConverterFactory.create(
-//                                        TikXml.Builder()
-//                                                .exceptionOnUnreadXml(false)
-//                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
-//                                                .build()
-//                                )
-//                        )
                                 .client(client.build())
                                 .build()
                     }
@@ -101,6 +93,16 @@ object RetrofitCreater {
     }
 }
 /*
+
+//                        .addConverterFactory(
+//                                TikXmlConverterFactory.create(
+//                                        TikXml.Builder()
+//                                                .exceptionOnUnreadXml(false)
+//                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
+//                                                .build()
+//                                )
+//                        )
+
 private fun setParameterIntercepter(){
         // 기본 파라매터 인터셉터 설정
         val baseParameterInterceptor : Interceptor = (object : Interceptor{
