@@ -70,10 +70,8 @@ object RetrofitCreater {
                         retrofitClient = Retrofit.Builder()
                                 .baseUrl(baseUrl)
                                 .addConverterFactory(GsonConverterFactory.create())
-
                                 // 위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.
                                 .client(client.build())
-
                                 .build()
                     }
                     API.XML -> {
