@@ -22,7 +22,9 @@ class BankHolder(
             setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION){
                     try {
-                        iClickListener.onClick(adapterPosition,"${holderBinding.title}")
+                        Log.e("mException", "CLICKED: ${holderBinding.title.text}")
+
+                        iClickListener.onClick(adapterPosition,"${holderBinding.title.text}")
                     }catch (e:Exception){
                         Log.e("mException", "에러발생 -> BankHolder, init, setOnClickListener // Exception : ${e.message}")
                     }

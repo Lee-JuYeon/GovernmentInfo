@@ -1,15 +1,14 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
 import android.util.Log.e
-import com.universeindustry.governmentinfo.online.retrofit.model.Items
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
+import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
 
 class RetrofitCallingManager {
 
@@ -17,9 +16,42 @@ class RetrofitCallingManager {
         val instance = RetrofitCallingManager()
     }
 
+    private val iRetrofit : (String, String) -> IRetrofit? = { url, type -> RetrofitCreater.getClient(url, type)?.create(IRetrofit::class.java) }
+    fun getBankListData(completion: (String) -> Unit){
+        val call = iRetrofit(API.bankingBaseURL, "JSON")?.getBankingDespositByPapge(searchBank = "1") ?: return
+        call.enqueue(object : Callback<JsonElement>{
+            // 응답 실패시
+            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+                e("mException", "에러발생 : RetrofitCallingManager // Throwable : $t")
+            }
+
+            // 응답 성공시
+            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+                if (response.isSuccessful && response.code() == 200){
+                    response.body().let {
+//                        it?.asJsonObject
+//                        JSONObject(message).toString(4)
+                        completion(JSONObject(it.toString()).toString(4))
+                    }
+                }
+//                response.body()?.let {
+//                    var parsedDespositDataArray = ArrayList<BankDespositModelTree>()
+//
+//                    val body = it.asJsonObject
+//                    val baseList = body.asJsonArray
+//                    e("mException", "body // $body")
+//
+//                    val totalCount = body.get("total_count")
+//                }
+            }
+        })
+    }
+}
+
+/*
+
     // 레트로핏 인터페이스 가져오기
     private val iRetrofit : IRetrofit? = RetrofitCreater.getClient(API.licenseListURLTest)?.create(IRetrofit::class.java)
-
     fun getLicenseList(completion : (String) -> Unit){
         val call = iRetrofit?.getLicenseTItles(query = API.licenseListAuthKey) ?: return
         call.enqueue(object : retrofit2.Callback<Items>{
@@ -81,4 +113,4 @@ class RetrofitCallingManager {
             }
         })
     }
-}
+ */
