@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.MainActivity
 import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragSearchBinding
+import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankModel
 import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel
 import com.universeindustry.governmentinfo.views.fragments.license.recyclerview.LicenseModel
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
+import org.json.JSONObject
+import javax.json.JsonObject
 
 class SearchFragment : Fragment(){
     private lateinit var binding: FragSearchBinding
@@ -130,6 +133,11 @@ class SearchFragment : Fragment(){
                         }
                     })
                 }
+
+                // 테스트 쿼리 불러오는 곳입니다. 쿼리는 online-retrofit-API의 textQuery를 불러왔습니다.
+                RetrofitCallingManager.instance.getBankListData {
+                    e("mException", "\n \n 출력 : ${it}")
+                }
             }
         }catch (e:Exception){
             e("mException", "에러발생 : SearchFragment, onActivityCreated  // Exception : ${e.message}")
@@ -142,7 +150,7 @@ class SearchFragment : Fragment(){
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//
     private var searchAdapter: SearchAdapter? = null
     private var licenseClick : IClickListener? = null
-    fun setRecyclerView(get : RecyclerView){
+    private fun setRecyclerView(get : RecyclerView){
         try {
             licenseClick = object : IClickListener{
                 override fun onClick(position : Int, listValueString: Any?) {

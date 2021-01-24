@@ -16,12 +16,44 @@ interface IRetrofit {
     @GET("{query}")
     fun mTextQuery(@Query("query") query : String) : Call<JsonElement>
 
+    //----------------- 자격증 ------------------------------------------------------//
+
     // 국가자격증 종목
     @GET("getList?")
     fun getLicenseTItles(@Query("serviceKey") query : String) : Call<Items>
-}
 
+    //----------------- 은행 --------------------------------------------------------//
+
+    // https://www.unsplash.com/  search/photos/  ?query="  search/users  "
+
+    /*
+ http://finlife.fss.or.kr/finlifeapi/
+ depositProductsSearch.json ?
+ auth=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx &
+ topFinGrpNo=020000 &
+ pageNo=1
+  */
+
+    // 정기예금
+    @GET(API.bankingDesposit)
+    fun getBankingDespositByPapge(@Query("pageNo") searchBank: String) : Call<JsonElement>
+
+    // 적금
+
+    // 연금저축
+
+    //----------------- 지원금 ------------------------------------------------------//
+
+}
 /*
+
+    @GET("api/1.0/")
+    fun getQuotes(
+            @Query("method")method: String,
+            @Query("format")format: String,
+            @Query("lang") lang:String
+    ): Call<QuoteModel>
+
 
         어노테이션	설명
         @Path	API 엔드포인트의 변수를 대채
