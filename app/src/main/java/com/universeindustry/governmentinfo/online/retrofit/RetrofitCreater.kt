@@ -45,15 +45,44 @@ object RetrofitCreater {
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         client.addInterceptor(loggingInterceptor)
     }
+    private fun setParameterIntercepter(){
+        // 기본 파라매터 인터셉터 설정
+        val baseParameterInterceptor : Interceptor = (object : Interceptor{
+            override fun intercept(chain: Interceptor.Chain): Response {
+                // 오리지날 리퀘스트
+                val beforeSetParameter = chain.request()
+
+                // ?client_id=asdfadsf
+                // 쿼리 파라매터 추가하기
+                val addedUrl = beforeSetParameter.url.newBuilder()
+                        .addQueryParameter("auth", API.bankingAuthKey)
+                        .addQueryParameter("topFinGrpNo","020000")
+                        .addQueryParameter("pageNo","1")
+                        .build()
+
+                val finalRequest = beforeSetParameter.newBuilder()
+                        .url(addedUrl)
+                        .method(beforeSetParameter.method, beforeSetParameter.body)
+                        .build()
+                return chain.proceed(finalRequest)
+            }
+        })
+
+
+        // 위에서 설정한 기본파라매터 인터셉터를 okhttp 클라이언트에 추가한다.
+        client.addInterceptor(baseParameterInterceptor)
+    }
+
     private fun setOkHttpBuilder(){
         setLoggingIntercepter()
-//        setParameterIntercepter()
+        setParameterIntercepter()
 
         // 커넥션 타임아웃
+        val exitTime = 10L
         client.apply {
-            connectTimeout(328, TimeUnit.SECONDS)
-            readTimeout(328, TimeUnit.SECONDS)
-            writeTimeout(328, TimeUnit.SECONDS)
+            connectTimeout(exitTime, TimeUnit.SECONDS) // 10초동안 연결했는데 실패했을 경우 종료
+            readTimeout(exitTime, TimeUnit.SECONDS)
+            writeTimeout(exitTime, TimeUnit.SECONDS)
             retryOnConnectionFailure(true)
         }
     }
@@ -61,7 +90,7 @@ object RetrofitCreater {
     // retrofit 클라이언트 가져오기
     fun getClient(baseUrl: String, type : String): Retrofit?{
         try {
-            setOkHttpBuilder()
+//            setOkHttpBuilder()
             if (retrofitClient == null){
                 // retrofit 빌더를 통해 인스턴스 생성
                 when(type){

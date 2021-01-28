@@ -17,7 +17,7 @@ class RetrofitCallingManager {
     }
 
     private val iRetrofit : (String, String) -> IRetrofit? = { url, type -> RetrofitCreater.getClient(url, type)?.create(IRetrofit::class.java) }
-    fun getBankListData(completion: (String) -> Unit){
+    fun getBankListData(completion: (ArrayList<BankDespositModelTree>) -> Unit){
         val call = iRetrofit(API.bankingBaseURL, "JSON")?.getBankingDespositByPapge(searchBank = "1") ?: return
         call.enqueue(object : Callback<JsonElement>{
             // 응답 실패시
@@ -29,20 +29,56 @@ class RetrofitCallingManager {
             override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
                 if (response.isSuccessful && response.code() == 200){
                     response.body().let {
+                        val body = it?.asJsonObject?.getAsJsonObject("result")
+                        when(body?.get("err_msg")?.asString){
+                            "정상" -> {
+
+                                val despositList : ArrayList<BankDespositModelTree> = arrayListOf()
+                                body.getAsJsonArray("baseList").forEach {
+                                    val data =  it.asJsonObject
+                                    val itemTitle = data.get("fin_prdt_nm").asString // 상품이름
+                                    val bankTitle = data.get("kor_co_nm").asString // 은행이름
+                                    val code = data.get("fin_prdt_cd").asString // 금융상품 코드
+
+                                    val despositItem = BankDespositModelTree(
+                                            itemTItle = itemTitle,
+                                            bankTitle = bankTitle,
+                                            type = null,
+                                            saving = null,
+                                            vip = null,
+                                            term = null,
+                                            code = code
+                                    )
+                                    despositList.add(despositItem)
+                                }
+                                completion(despositList)
+
+//                                body.getAsJsonArray("optionList").forEach {
+//                                    val data =  it.asJsonObject
+//                                    val type = data.get("intr_rate_type_nm").asString // 저축 금리 유형
+//                                    val term = data.get("save_trm").asString // 저축 기간
+//                                    val saving = data.get("intr_rate").asString // 기본 저축금리
+//                                    val vip = data.get("intr_rate2").asString // 최고 우대금리
+//                                    val code = data.get("fin_prdt_cd").asString // 금융상품 코드
+//
+//
+//                                }
+                            }
+                            "일일검색 허용횟수 초과" -> {
+                                // 개인의 경우로, 일일허용횟수를 초과하여 사용한 경우
+
+                            }
+                            else -> {
+                                // Open API 서비스 내부 시스템 에러
+
+                            }
+                        }
+
 //                        it?.asJsonObject
 //                        JSONObject(message).toString(4)
-                        completion(JSONObject(it.toString()).toString(4))
+//                        completion(JSONObject(it.toString()).toString(4))
                     }
                 }
-//                response.body()?.let {
-//                    var parsedDespositDataArray = ArrayList<BankDespositModelTree>()
-//
-//                    val body = it.asJsonObject
-//                    val baseList = body.asJsonArray
-//                    e("mException", "body // $body")
-//
-//                    val totalCount = body.get("total_count")
-//                }
             }
         })
     }

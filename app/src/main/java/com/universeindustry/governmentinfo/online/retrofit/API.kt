@@ -33,8 +33,15 @@ object API{
 
     // 정기예금
     const val bankingDesposit = "depositProductsSearch.json?auth=56083c1c015436cde4007260668ef487&topFinGrpNo=020000"
+    val desposit = "정기예금"
+
     // 적금
-    val bankingSaving = "savingProductsSearch.json"
+    const val bankingSaving = "savingProductsSearch.json"
+    val saving = "적금"
+
     // 연금저축
-    val bankingAnnuitySaving = "annuitySavingProductsSearch.json"
+    const val bankingAnnuitySaving = "annuitySavingProductsSearch.json"
+    val annuitySaving = "연금저축"
+
+
 }
