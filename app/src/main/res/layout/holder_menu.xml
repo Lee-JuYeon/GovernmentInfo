@@ -7,6 +7,7 @@
             name="menuModel"
             type="com.universeindustry.governmentinfo.views.fragments.menu.recyclerview.MenuModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -32,7 +33,7 @@
             android:text="@{menuModel.title}"
             android:textAllCaps="false"
             android:textSize="20sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/white"
             android:fontFamily="@font/notosans_semicondensed_extrabold"
             android:gravity="center">
         </TextView>

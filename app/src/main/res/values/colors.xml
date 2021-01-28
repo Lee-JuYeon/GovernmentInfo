@@ -8,6 +8,28 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    // 럭셔리 컬러
+    <color name="luxury_blueBackground">#001b30</color>
+    <color name="luxury_blueLayer">#004860</color>
+    <color name="luxury_bluePointDeep">#bb9496</color>
+    <color name="luxury_bluePointBriliant">#d8b8b3</color>
+    <color name="luxury_blueWood">#7f5744</color>
+    <color name="luxury_blueGold">#f5ec06</color>
+
+    <color name="luxury_greenBackground">#1f3524</color>
+    <color name="luxury_greenLayer">#284938</color>
+    <color name="luxury_greenPointDeep">#d4c2b4</color>
+    <color name="luxury_greenPointBriliant">#dfd2c9</color>
+    <color name="luxury_greenWood">#57371f</color>
+    <color name="luxury_greenGold">#f5ec06</color>
+
+    <color name="luxury_pinkBackground">#be9998</color>
+    <color name="luxury_pinkLayer">#d3b2b3</color>
+    <color name="luxury_pinkPointDeep">#dfbeb5</color>
+    <color name="luxury_pinkPointBriliant">#ddc6ba</color>
+    <color name="luxury_pinkWood">#271113</color>
+    <color name="luxury_pinkGold">#f5ec06</color>
+
 
     // 우분투 색상
     <color name="ubuntu_red">#f17e5a</color>
@@ -38,26 +60,4 @@
     // 기본 컬러
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
-
-    // 럭셔리 컬러
-    <color name="luxury_blueBackground">#001b30</color>
-    <color name="luxury_blueLayer">#004860</color>
-    <color name="luxury_bluePointDeep">#bb9496</color>
-    <color name="luxury_bluePointBriliant">#d8b8b3</color>
-    <color name="luxury_blueWood">#7f5744</color>
-    <color name="luxury_blueGold">#f5ec06</color>
-
-    <color name="luxury_greenBackground">#1f3524</color>
-    <color name="luxury_greenLayer">#284938</color>
-    <color name="luxury_greenPointDeep">#d4c2b4</color>
-    <color name="luxury_greenPointBriliant">#dfd2c9</color>
-    <color name="luxury_greenWood">#57371f</color>
-    <color name="luxury_greenGold">#f5ec06</color>
-
-    <color name="luxury_pinkBackground">#be9998</color>
-    <color name="luxury_pinkLayer">#d3b2b3</color>
-    <color name="luxury_pinkPointDeep">#dfbeb5</color>
-    <color name="luxury_pinkPointBriliant">#ddc6ba</color>
-    <color name="luxury_pinkWood">#271113</color>
-    <color name="luxury_pinkGold">#f5ec06</color>
 </resources>

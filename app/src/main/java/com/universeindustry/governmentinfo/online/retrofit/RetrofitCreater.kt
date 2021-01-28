@@ -1,7 +1,6 @@
 package com.universeindustry.governmentinfo.online.retrofit
 
 import android.util.Log.e
-import com.universeindustry.governmentinfo.BuildConfig
 import com.universeindustry.governmentinfo.utils.extensions.Strings.isJsonArray
 import com.universeindustry.governmentinfo.utils.extensions.Strings.isJsonObject
 import okhttp3.Interceptor
@@ -49,6 +48,91 @@ object RetrofitCreater {
     private fun setParameterIntercepter(){
         // 기본 파라매터 인터셉터 설정
         val baseParameterInterceptor : Interceptor = (object : Interceptor{
+            override fun intercept(chain: Interceptor.Chain): Response {
+                // 오리지날 리퀘스트
+                val beforeSetParameter = chain.request()
+
+                // ?client_id=asdfadsf
+                // 쿼리 파라매터 추가하기
+                val addedUrl = beforeSetParameter.url.newBuilder()
+                        .addQueryParameter("auth", API.bankingAuthKey)
+                        .addQueryParameter("topFinGrpNo","020000")
+                        .addQueryParameter("pageNo","1")
+                        .build()
+
+                val finalRequest = beforeSetParameter.newBuilder()
+                        .url(addedUrl)
+                        .method(beforeSetParameter.method, beforeSetParameter.body)
+                        .build()
+                return chain.proceed(finalRequest)
+            }
+        })
+
+
+        // 위에서 설정한 기본파라매터 인터셉터를 okhttp 클라이언트에 추가한다.
+        client.addInterceptor(baseParameterInterceptor)
+    }
+
+    private fun setOkHttpBuilder(){
+        setLoggingIntercepter()
+        setParameterIntercepter()
+
+        // 커넥션 타임아웃
+        val exitTime = 10L
+        client.apply {
+            connectTimeout(exitTime, TimeUnit.SECONDS) // 10초동안 연결했는데 실패했을 경우 종료
+            readTimeout(exitTime, TimeUnit.SECONDS)
+            writeTimeout(exitTime, TimeUnit.SECONDS)
+            retryOnConnectionFailure(true)
+        }
+    }
+
+    // retrofit 클라이언트 가져오기
+    fun getClient(baseUrl: String, type : String): Retrofit?{
+        try {
+//            setOkHttpBuilder()
+            if (retrofitClient == null){
+                // retrofit 빌더를 통해 인스턴스 생성
+                when(type){
+                    API.JSON -> {
+                        // 레트로핏 빌더를 통해 인스턴스 생성
+                        retrofitClient = Retrofit.Builder()
+                                .baseUrl(baseUrl)
+                                .addConverterFactory(GsonConverterFactory.create())
+                                // 위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.
+                                .client(client.build())
+                                .build()
+                    }
+                    API.XML -> {
+                        retrofitClient = Retrofit.Builder()
+                                .baseUrl(baseUrl)
+                                .addConverterFactory(SimpleXmlConverterFactory.create())
+                                .client(client.build())
+                                .build()
+                    }
+                }
+            }
+        }catch (e:Exception){
+            e("mException", "RetrofitClient, getClient // Exception : ${e.message}")
+        }finally {
+            return retrofitClient
+        }
+    }
+}
+/*
+
+//                        .addConverterFactory(
+//                                TikXmlConverterFactory.create(
+//                                        TikXml.Builder()
+//                                                .exceptionOnUnreadXml(false)
+//                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
+//                                                .build()
+//                                )
+//                        )
+
+private fun setParameterIntercepter(){
+        // 기본 파라매터 인터셉터 설정
+        val baseParameterInterceptor : Interceptor = (object : Interceptor{
 
             override fun intercept(chain: Interceptor.Chain): Response {
                 // 오리지날 리퀘스트
@@ -70,69 +154,4 @@ object RetrofitCreater {
         // 위에서 설정한 기본파라매터 인터셉터를 okhttp 클라이언트에 추가한다.
         client.addInterceptor(baseParameterInterceptor)
     }
-
-    private var logging = HttpLoggingInterceptor()
-    private fun getHttpLogClient() : OkHttpClient{
-        val httpClient = OkHttpClient().newBuilder()
-                .connectTimeout(1000, TimeUnit.SECONDS)
-                .readTimeout(328, TimeUnit.SECONDS)
-                .writeTimeout(328, TimeUnit.SECONDS)
-        logging.level = HttpLoggingInterceptor.Level.BODY
-        httpClient.addInterceptor(logging)
-        return httpClient.build()
-    }
-    private fun setOkHttpBuilder(){
-//        setLoggingIntercepter()
-//        setParameterIntercepter()
-
-        // 커넥션 타임아웃
-        client.apply {
-            connectTimeout(328, TimeUnit.SECONDS)
-            readTimeout(328, TimeUnit.SECONDS)
-            writeTimeout(328, TimeUnit.SECONDS)
-            retryOnConnectionFailure(true)
-        }
-    }
-
-    // retrofit 클라이언트 가져오기
-    fun getClient(baseUrl: String, type : String): Retrofit?{
-        try {
-//            setOkHttpBuilder()
-            if (retrofitClient == null){
-                // retrofit 빌더를 통해 인스턴스 생성
-                when(type){
-                    API.JSON -> {
-                        // 레트로핏 빌더를 통해 인스턴스 생성
-                        retrofitClient = Retrofit.Builder()
-                                .baseUrl(baseUrl)
-                                .addConverterFactory(GsonConverterFactory.create())
-
-                                // 위에서 설정한 클라이언트로 레트로핏 클라이언트를 설정한다.
-                                .client(getHttpLogClient())
-
-                                .build()
-                    }
-                    API.XML -> {
-                        retrofitClient = Retrofit.Builder()
-                                .baseUrl(baseUrl)
-                                .addConverterFactory(SimpleXmlConverterFactory.create())
-//                        .addConverterFactory(
-//                                TikXmlConverterFactory.create(
-//                                        TikXml.Builder()
-//                                                .exceptionOnUnreadXml(false)
-//                                                .addTypeConverter(String.javaClass, HtmlEscapeStringConverter())
-//                                                .build()
-//                                )
-//                        )
-                                .client(getHttpLogClient())
-                                .build()
-                    }
-                }
-            }
-        }catch (e:Exception){
-            e("mException", "RetrofitClient, getClient // Exception : ${e.message}")
-        }finally {
-            return retrofitClient
-        }
-    }
-}
+ */

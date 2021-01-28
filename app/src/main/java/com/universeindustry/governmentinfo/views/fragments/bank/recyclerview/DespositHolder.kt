@@ -4,15 +4,16 @@ import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.BR
 import com.universeindustry.governmentinfo.databinding.HolderBankBinding
+import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
-class BankHolder(
+class DespositHolder(
         private val holderBinding: HolderBankBinding,
         private val iClickListener: IClickListener
 ) : RecyclerView.ViewHolder(holderBinding.root){
-    fun dataBinding(model : Any?){
+    fun dataBinding(model : BankDespositModelTree?){
         holderBinding.apply {
-            setVariable(BR.bankModel, model as BankModel)
+            setVariable(BR.bankModel, model)
             executePendingBindings()
         }
     }

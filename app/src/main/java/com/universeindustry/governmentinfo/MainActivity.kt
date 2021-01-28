@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.universeindustry.governmentinfo.databinding.ActivityMainBinding
 import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
+import com.universeindustry.governmentinfo.views.fragments.bank.BankFragment
 import com.universeindustry.governmentinfo.views.fragments.menu.MenuFragment
 import com.universeindustry.governmentinfo.views.fragments.search.SearchFragment
 
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     val mainVM : MainViewModel by viewModels()
     private lateinit var _menuFrag : MenuFragment
     private var _searchFrag : SearchFragment? = null
+    private var _bankFrag : BankFragment? = null
     private fun setMainVM(){
         mainVM.getFragmentType.observe(this, Observer {
             val manager = supportFragmentManager.beginTransaction()
@@ -50,9 +52,9 @@ class MainActivity : AppCompatActivity() {
                             .commit()
                 }
                 Strings.bank -> {
-                    if (_searchFrag == null) _searchFrag = SearchFragment()
-                    _searchFrag = SearchFragment()
-                    manager.replace(R.id.framelayout, _searchFrag!!)
+                    if (_bankFrag == null) _bankFrag = BankFragment()
+                    _bankFrag = BankFragment()
+                    manager.replace(R.id.framelayout, _bankFrag!!)
                             .commit()
                 }
                 Strings.vaccine -> {
@@ -64,7 +66,6 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     _menuFrag = MenuFragment()
                     manager.replace(R.id.framelayout, _menuFrag)
-//                        .addToBackStack(null)
                         .commit()
                 }
             }
