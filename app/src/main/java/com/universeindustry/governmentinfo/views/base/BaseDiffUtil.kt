@@ -1,20 +1,20 @@
-package com.universeindustry.governmentinfo.views.fragments.search
+package com.universeindustry.governmentinfo.views.base
 
 import androidx.recyclerview.widget.DiffUtil
-import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankModel
+import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
 import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel
 import com.universeindustry.governmentinfo.views.fragments.license.recyclerview.LicenseModel
 
-class SearchDiffUtil (private val oldList : MutableList<Any>,
-                        private val currentList : List<Any>,
-                        private val type : Any) : DiffUtil.Callback(){
+class BaseDiffUtil (private val oldList : MutableList<Any>,
+                    private val currentList : List<Any>,
+                    private val type : Any) : DiffUtil.Callback(){
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return when(type){
             is LicenseModel -> {
                 (oldList as MutableList<LicenseModel>)[oldItemPosition] == (currentList as MutableList<LicenseModel>)[newItemPosition]
             }
-            is BankModel -> {
-                (oldList as MutableList<BankModel>)[oldItemPosition] == (currentList as MutableList<BankModel>)[newItemPosition]
+            is BankDespositModelTree -> {
+                (oldList as MutableList<BankDespositModelTree>)[oldItemPosition] == (currentList as MutableList<BankDespositModelTree>)[newItemPosition]
             }
             is FundingModel -> {
                 (oldList as MutableList<FundingModel>)[oldItemPosition] == (currentList as MutableList<FundingModel>)[newItemPosition]
@@ -30,8 +30,8 @@ class SearchDiffUtil (private val oldList : MutableList<Any>,
             is LicenseModel -> {
                 (oldList as MutableList<LicenseModel>)[oldItemPosition].title == (currentList as MutableList<LicenseModel>)[newItemPosition].title
             }
-            is BankModel -> {
-                (oldList as MutableList<BankModel>)[oldItemPosition].title == (currentList as MutableList<BankModel>)[newItemPosition].title
+            is BankDespositModelTree -> {
+                (oldList as MutableList<BankDespositModelTree>)[oldItemPosition].itemTItle == (currentList as MutableList<BankDespositModelTree>)[newItemPosition].itemTItle
             }
             is FundingModel -> {
                 (oldList as MutableList<FundingModel>)[oldItemPosition].title == (currentList as MutableList<FundingModel>)[newItemPosition].title

@@ -4,12 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.universeindustry.governmentinfo.R
-import com.universeindustry.governmentinfo.utils.extensions.Strings
-import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankModel
-import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel
-import com.universeindustry.governmentinfo.views.fragments.license.recyclerview.LicenseModel
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchVM : ViewModel(){

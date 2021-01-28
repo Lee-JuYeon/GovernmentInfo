@@ -15,14 +15,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.MainActivity
 import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragSearchBinding
-import com.universeindustry.governmentinfo.online.retrofit.RetrofitCallingManager
 import com.universeindustry.governmentinfo.utils.extensions.Strings
-import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankModel
 import com.universeindustry.governmentinfo.views.fragments.funding.recyclerview.FundingModel
 import com.universeindustry.governmentinfo.views.fragments.license.recyclerview.LicenseModel
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
-import org.json.JSONObject
-import javax.json.JsonObject
 
 class SearchFragment : Fragment(){
     private lateinit var binding: FragSearchBinding
@@ -111,32 +107,8 @@ class SearchFragment : Fragment(){
                                         )
                                 )
                             }
-                            Strings.bank-> {
-                                searchAdapter?.setFragmentType(
-                                        get = fragmentType,
-                                        newList = arrayListOf(
-                                                BankModel(
-                                                        title = "은행 타이틀1",
-                                                        type = "유형:단기",
-                                                        saving = "저축금리",
-                                                        vip = "우대금리"
-                                                ),
-                                                BankModel(
-                                                        title = "은행 타이틀2",
-                                                        type = "유형:단기",
-                                                        saving = "저축금리",
-                                                        vip = "우대금리"
-                                                )
-                                        )
-                                )
-                            }
                         }
                     })
-                }
-
-                // 테스트 쿼리 불러오는 곳입니다. 쿼리는 online-retrofit-API의 textQuery를 불러왔습니다.
-                RetrofitCallingManager.instance.getBankListData {
-                    e("mException", "\n \n 출력 : ${it}")
                 }
             }
         }catch (e:Exception){
@@ -145,6 +117,8 @@ class SearchFragment : Fragment(){
             super.onActivityCreated(savedInstanceState)
         }
     }
+
+
 
 
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//

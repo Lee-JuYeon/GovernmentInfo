@@ -5,7 +5,7 @@
     <data>
         <variable
             name="bankModel"
-            type="com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankModel" />
+            type="com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,10 +18,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:id="@+id/title"
-            android:text="@{bankModel.title}"
+            android:text="@{bankModel.itemTItle}"
             android:textAllCaps="false"
             android:textSize="25sp"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/white"
             android:fontFamily="@font/notosans_semicondensed_extrabold"
             android:gravity="center">
         </TextView>
