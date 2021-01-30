@@ -31,7 +31,7 @@ class BaseDiffUtil (private val oldList : MutableList<Any>,
                 (oldList as MutableList<LicenseModel>)[oldItemPosition].title == (currentList as MutableList<LicenseModel>)[newItemPosition].title
             }
             is BankDespositModelTree -> {
-                (oldList as MutableList<BankDespositModelTree>)[oldItemPosition].itemTItle == (currentList as MutableList<BankDespositModelTree>)[newItemPosition].itemTItle
+                (oldList as MutableList<BankDespositModelTree>)[oldItemPosition].fin_prdt_nm == (currentList as MutableList<BankDespositModelTree>)[newItemPosition].fin_prdt_nm
             }
             is FundingModel -> {
                 (oldList as MutableList<FundingModel>)[oldItemPosition].title == (currentList as MutableList<FundingModel>)[newItemPosition].title

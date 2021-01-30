@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.universeindustry.governmentinfo.databinding.HolderBankBinding
+import com.universeindustry.governmentinfo.databinding.HolderBankDespositBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
-import com.universeindustry.governmentinfo.utils.extensions.Strings
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 import com.universeindustry.governmentinfo.views.base.BaseDiffUtil
 
@@ -39,13 +38,13 @@ class BankAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val typeAnnuitySaving : Int = 2
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val bankBinding = HolderBankBinding.inflate(layoutInflater, parent, false)
+        val bankDespositBinding = HolderBankDespositBinding.inflate(layoutInflater, parent, false)
 
         return when(viewType){
-            typeDesposit -> DespositHolder(bankBinding, iClickListener!!)
-            typeSaving -> DespositHolder(bankBinding, iClickListener!!)
-            typeAnnuitySaving -> DespositHolder(bankBinding, iClickListener!!)
-            else -> DespositHolder(bankBinding, iClickListener!!)
+            typeDesposit -> DespositHolder(bankDespositBinding, iClickListener!!)
+            typeSaving -> DespositHolder(bankDespositBinding, iClickListener!!)
+            typeAnnuitySaving -> DespositHolder(bankDespositBinding, iClickListener!!)
+            else -> DespositHolder(bankDespositBinding, iClickListener!!)
         }
     }
 

@@ -6,18 +6,18 @@ import android.util.Log.e
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.universeindustry.governmentinfo.MainActivity
 import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragBankBinding
+import com.universeindustry.governmentinfo.online.retrofit.API
+import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
 import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankAdapter
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
@@ -64,7 +64,6 @@ class BankFragment : Fragment(){
                 _BankVM.let {
                     it.getDespositList.observe(activity as MainActivity, Observer {
                         bankAdapter?.setRecyclerviewType(
-//                                get = tablayout?.get(tab),
                                 get = API.desposit,
                                 newList = it
                         )
@@ -77,12 +76,14 @@ class BankFragment : Fragment(){
             super.onActivityCreated(savedInstanceState)
         }
     }
+
     //----------------------------------------- Tablayout 설정 ---------------------------------------------//
+    private var setTabItemString : (Int) -> Unit = { get -> tablayout?.addTab(tablayout?.newTab()?.setText(resources.getString(get))!!) }
     private fun setTablayout(getTablayout : TabLayout){
         getTablayout.let {
-            it.addTab(it.newTab().setText(requireContext().resources.getText(R.string.bank_type_desposit)))
-            it.addTab(it.newTab().setText(requireContext().resources.getText(R.string.bank_type_saving)))
-            it.addTab(it.newTab().setText(requireContext().resources.getText(R.string.bank_type_annuitySaving)))
+            setTabItemString(R.string.bank_type_desposit)
+            setTabItemString(R.string.bank_type_saving)
+            setTabItemString(R.string.bank_type_annuitySaving)
 
             it.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                 override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -94,7 +95,6 @@ class BankFragment : Fragment(){
         }
     }
 
-
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//
     private var bankAdapter: BankAdapter? = null
     private var bankClick : IClickListener? = null
@@ -102,7 +102,7 @@ class BankFragment : Fragment(){
         try {
             bankClick = object : IClickListener{
                 override fun onClick(position : Int, listValueString: Any?) {
-                    e("mException", "눌린 것 : ${listValueString as String}")
+                    e("mException", "눌린 것 : ${listValueString.toString()}")
                 }
             }
 
