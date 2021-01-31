@@ -33,8 +33,8 @@
             android:text="@{menuModel.title}"
             android:textAllCaps="false"
             android:textSize="20sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/notosans_semicondensed_extrabold"
+            android:textColor="@color/luxury_bluePointDeep"
+            android:fontFamily="@font/kotra_bold"
             android:gravity="center">
         </TextView>
     </LinearLayout>
