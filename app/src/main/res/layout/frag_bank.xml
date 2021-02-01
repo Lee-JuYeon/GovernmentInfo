@@ -18,9 +18,10 @@
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/luxury_blueBackground"
             android:id="@+id/tablayout"
-            app:tabSelectedTextColor="@color/luxury_blueGold"
-            app:tabTextColor="@color/white"/>
+            app:tabSelectedTextColor="@color/luxury_bluePointBriliant"
+            app:tabTextColor="@color/white" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

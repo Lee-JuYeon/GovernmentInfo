@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="oval">
+            <solid
+                android:color="@color/ubuntu_red"/>
+        </shape>
+
+    </item>
+    <item
+        android:bottom="100dp"
+        android:left="100dp"
+        android:right="100dp"
+        android:top="100dp">
+        <bitmap
+            android:src="@drawable/button_cancel"
+            android:tint="@color/colorWhite" />
+    </item>
+</layer-list>

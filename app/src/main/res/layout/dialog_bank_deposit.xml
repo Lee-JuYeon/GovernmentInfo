@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_all_radius"
+        android:id="@+id/backView"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:id="@+id/tabbar_container">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/title"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/kotra_bold"
+                android:gravity="center">
+            </TextView>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/dismiss"
+                android:src="@drawable/background_cancel"
+                android:padding="7dp"
+                android:contentDescription="@string/imageLoading">
+            </ImageView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/container"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/text"
+                android:text="@string/sample_text_2"
+                android:textSize="20sp"
+                android:textColor="@color/colorBlack"
+                android:gravity="center"
+                android:fontFamily="@font/notosans_semicondensed_semibold"/>
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

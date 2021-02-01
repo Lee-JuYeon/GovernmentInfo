@@ -18,7 +18,8 @@ import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragBankBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
-import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.BankAdapter
+import com.universeindustry.governmentinfo.views.custom.popupview.IOSDialog
+import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.AdapterTypeBank
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
 class BankFragment : Fragment(){
@@ -63,9 +64,9 @@ class BankFragment : Fragment(){
 
                 _BankVM.let {
                     it.getDespositList.observe(activity as MainActivity, Observer {
-                        bankAdapter?.setRecyclerviewType(
+                        adapterTypeBank?.setRecyclerviewType(
                                 get = API.desposit,
-                                newList = it
+                                newList = it as ArrayList<Any>
                         )
                     })
                 }
@@ -96,22 +97,33 @@ class BankFragment : Fragment(){
     }
 
     //----------------------------------------- 리사이클러뷰 설정 ---------------------------------------------//
-    private var bankAdapter: BankAdapter? = null
+    private var adapterTypeBank: AdapterTypeBank? = null
     private var bankClick : IClickListener? = null
     private fun setRecyclerView(get : RecyclerView){
         try {
             bankClick = object : IClickListener{
                 override fun onClick(position : Int, listValueString: Any?) {
-                    e("mException", "눌린 것 : ${listValueString.toString()}")
+                    when(listValueString){
+                        is BankDespositModelTree -> {
+                            val dialog = IOSDialog(requireContext())
+                            dialog.let {
+                                it.show()
+                                it.setTitle(listValueString.fin_prdt_nm)
+                                it.setChildView(
+                                      view = despositChart()
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
-            bankAdapter = BankAdapter().apply {
+            adapterTypeBank = AdapterTypeBank().apply {
                 setClickListener(bankClick!!)
             }
 
             get.apply {
-                adapter = bankAdapter
+                adapter = adapterTypeBank
                 layoutManager = LinearLayoutManager(context).apply {
                     orientation = LinearLayoutManager.VERTICAL
                     isItemPrefetchEnabled = false
@@ -123,4 +135,28 @@ class BankFragment : Fragment(){
             e("mException", "BankFragment, setRecyclerView // Exception : ${e.message}")
         }
     }
+
+//    private var despositAdapter : DespositAdapter? = null
+    private fun despositChart() : RecyclerView{
+        return RecyclerView(requireContext()).apply {
+            adapter = null
+            layoutManager  = LinearLayoutManager(requireContext()).apply {
+                orientation = LinearLayoutManager.HORIZONTAL
+                isItemPrefetchEnabled = false
+                setItemViewCacheSize(0)
+            }
+        }
+    }
 }
+
+/*
+  view = TextView(requireContext()).apply {
+                                            typeface = ResourcesCompat.getFont(
+                                                    requireContext(),
+                                                    R.font.notosans_semicondensed_semibold
+                                            )
+                                            setTextColor(resources.getColor(R.color.colorBlack,null))
+                                            textSize = 20f
+                                            text = "무엄ㄴ야랴ㅐ재ㅠㅁ아ㅣㅠ먀ㅐ래ㅑ재"
+                                        }
+ */
