@@ -15,7 +15,9 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:id="@+id/logo"
-            android:src="@drawable/image_coins"
+            android:src="@mipmap/app_logo_round"
+            android:scaleType="centerCrop"
+            android:padding="5dp"
             android:contentDescription="@string/imageLoading"/>
     </RelativeLayout>
     <FrameLayout

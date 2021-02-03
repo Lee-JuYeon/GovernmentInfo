@@ -1,5 +1,6 @@
 package com.universeindustry.governmentinfo
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.e
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         setMainVM()
 
+
+        supportFragmentManager.beginTransaction()
     }
 
     val mainVM : MainViewModel by viewModels()

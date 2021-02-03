@@ -1,11 +1,10 @@
-package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.deposit
+package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.ChartDeposit
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.databinding.HolderChartDepositBinding
-import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
 import com.universeindustry.governmentinfo.online.retrofit.model.OptionListItem
 import com.universeindustry.governmentinfo.views.base.BaseDiffUtil
 import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.HolderTypeDeposit

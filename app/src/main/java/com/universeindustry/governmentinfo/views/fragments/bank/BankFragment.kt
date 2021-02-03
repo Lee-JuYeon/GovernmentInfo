@@ -18,7 +18,7 @@ import com.universeindustry.governmentinfo.R
 import com.universeindustry.governmentinfo.databinding.FragBankBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
-import com.universeindustry.governmentinfo.views.custom.popupview.IOSDialog
+import com.universeindustry.governmentinfo.views.fragments.bank.dialog.DialogBankDeposit
 import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.AdapterTypeBank
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
 
@@ -64,9 +64,9 @@ class BankFragment : Fragment(){
 
                 _BankVM.let {
                     it.getDespositList.observe(activity as MainActivity, Observer {
-                        adapterTypeBank?.setRecyclerviewType(
+                        adapterTypeBank?.setDepositList(
                                 get = API.desposit,
-                                newList = it as ArrayList<Any>
+                                newList = it
                         )
                     })
                 }
@@ -105,13 +105,11 @@ class BankFragment : Fragment(){
                 override fun onClick(position : Int, listValueString: Any?) {
                     when(listValueString){
                         is BankDespositModelTree -> {
-                            val dialog = IOSDialog(requireContext())
+                            val dialog = DialogBankDeposit(requireContext())
                             dialog.let {
+                                it.setData(listValueString)
                                 it.show()
                                 it.setTitle(listValueString.fin_prdt_nm)
-                                it.setChildView(
-                                      view = despositChart()
-                                )
                             }
                         }
                     }
@@ -133,18 +131,6 @@ class BankFragment : Fragment(){
             }
         }catch (e:Exception){
             e("mException", "BankFragment, setRecyclerView // Exception : ${e.message}")
-        }
-    }
-
-//    private var despositAdapter : DespositAdapter? = null
-    private fun despositChart() : RecyclerView{
-        return RecyclerView(requireContext()).apply {
-            adapter = null
-            layoutManager  = LinearLayoutManager(requireContext()).apply {
-                orientation = LinearLayoutManager.HORIZONTAL
-                isItemPrefetchEnabled = false
-                setItemViewCacheSize(0)
-            }
         }
     }
 }

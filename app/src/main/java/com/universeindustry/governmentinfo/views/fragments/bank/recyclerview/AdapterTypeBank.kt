@@ -1,8 +1,6 @@
 package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview
 
 
-import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,30 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.databinding.HolderBankDespositBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
-import com.universeindustry.governmentinfo.online.retrofit.model.OptionListItem
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
-import com.universeindustry.governmentinfo.views.base.BaseDiffUtil
-import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.deposit.AdapterDeposit
+import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.ChartDeposit.AdapterDeposit
 
 
 class AdapterTypeBank : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var customList : ArrayList<Any>? = arrayListOf()
+    private var depositList : ArrayList<BankDespositModelTree>? = arrayListOf()
     private var fragmentType : String? = null
-    fun setRecyclerviewType(get : String, newList : ArrayList<Any>){
+    fun setDepositList(get : String, newList : ArrayList<BankDespositModelTree>){
         // 타입 업데이트
         this.fragmentType = get
 
         // 리스트 업데이트
         val diffResult = DiffUtil.calculateDiff(
-                BaseDiffUtil(
-                        oldList = customList ?: arrayListOf(),
-                        currentList = newList,
-                        type = get
+                DiffUtilBank(
+                        oldList = depositList ?: arrayListOf(),
+                        currentList = newList
                 ), false)
         diffResult.dispatchUpdatesTo(this@AdapterTypeBank)
-        customList?.clear()
-        customList?.addAll(newList)
+        depositList?.let {
+            it.clear()
+            it.addAll(newList)
+        }
     }
 
     private var iClickListener : IClickListener? = null
@@ -54,7 +51,6 @@ class AdapterTypeBank : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val bankDespositBinding = HolderBankDespositBinding.inflate(layoutInflater, parent, false)
         return when(viewType){
             typeDesposit -> {
-//                bankDespositBinding.recyclerview.adapter = adapterDeposit
                 HolderTypeDeposit(bankDespositBinding, iClickListener!!)
             }
             typeSaving -> HolderTypeDeposit(bankDespositBinding, iClickListener!!)
@@ -65,18 +61,18 @@ class AdapterTypeBank : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return when(fragmentType){
-            API.desposit -> customList?.size ?: 0
-            API.saving -> customList?.size ?: 0
-            API.annuitySaving -> customList?.size ?: 0
-            else -> customList?.size ?: 0
+            API.desposit -> depositList?.size ?: 0
+            API.saving -> depositList?.size ?: 0
+            API.annuitySaving -> depositList?.size ?: 0
+            else -> depositList?.size ?: 0
         }
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is HolderTypeDeposit -> {
-                val dataList = customList!![position]
+                val dataList = depositList!![position]
                 holder.dataBinding(
-                        model = dataList as BankDespositModelTree
+                        model = dataList
                 )
                 adapterDeposit?.setList(dataList.optionListItem)
             }

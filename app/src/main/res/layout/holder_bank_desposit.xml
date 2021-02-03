@@ -36,6 +36,6 @@
            android:textSize="15sp"
            android:textColor="@color/colorWhite"
            android:fontFamily="@font/kotra_bold"
-           android:gravity="center"/>
+           android:gravity="center|start"/>
     </RelativeLayout>
 </layout>

@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:background="@drawable/background_rectangle"
         android:gravity="center"
         android:id="@+id/background">
         <TextView
@@ -21,7 +22,7 @@
             android:text="@{listItem.save_trm}"
             android:textAllCaps="false"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/notosans_semicondensed_semibold"
             android:gravity="center"/>
         <TextView
@@ -31,7 +32,7 @@
             android:id="@+id/intr_rate_type_nm"
             android:text="@{listItem.intr_rate_type_nm}"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/notosans_semicondensed_semibold"
             android:gravity="center"/>
         <TextView
@@ -41,7 +42,7 @@
             android:id="@+id/intr_rate"
             android:text="@{listItem.intr_rate}"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/notosans_semicondensed_semibold"
             android:gravity="center"/>
         <TextView
@@ -51,8 +52,9 @@
             android:id="@+id/intr_rate2"
             android:text="@{listItem.intr_rate2}"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:fontFamily="@font/notosans_semicondensed_semibold"
             android:gravity="center"/>
+
     </RelativeLayout>
 </layout>

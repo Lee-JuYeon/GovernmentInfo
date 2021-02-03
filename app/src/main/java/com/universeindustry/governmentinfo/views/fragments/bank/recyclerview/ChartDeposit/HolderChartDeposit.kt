@@ -1,4 +1,4 @@
-package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.deposit
+package com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.ChartDeposit
 
 import androidx.recyclerview.widget.RecyclerView
 import com.universeindustry.governmentinfo.BR
