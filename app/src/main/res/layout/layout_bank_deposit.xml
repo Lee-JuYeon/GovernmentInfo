@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="bankModel"
+            type="com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree" />
+    </data>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@color/luxury_bluePointDeep"
+        android:id="@+id/background">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/text"
+            android:text="asdf"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            android:fontFamily="@font/notosans_semicondensed_semibold"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@id/text"
+            android:id="@+id/recyclerview"/>
+    </RelativeLayout>
+</layout>

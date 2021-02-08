@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.GovernmentInfo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/luxury_blueLayer</item>
-        <item name="colorPrimaryVariant">@color/luxury_blueBackground</item>
+        <item name="colorPrimary">@color/luxury_blueBackground</item>
+        <item name="colorPrimaryVariant">@color/luxury_blueLayer</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/luxury_greenLayer</item>
-        <item name="colorSecondaryVariant">@color/luxury_greenBackground</item>
+        <item name="colorSecondary">@color/luxury_greenBackground</item>
+        <item name="colorSecondaryVariant">@color/luxury_greenLayer</item>
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Status bar color. -->

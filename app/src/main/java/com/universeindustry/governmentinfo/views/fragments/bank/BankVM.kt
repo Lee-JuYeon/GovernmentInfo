@@ -26,6 +26,9 @@ class BankVM() : ViewModel() {
         // 테스트 쿼리 불러오는 곳입니다. 쿼리는 online-retrofit-API의 textQuery를 불러왔습니다.
         RetrofitCallingManager.instance.let {
             it.getBankListData {
+                it.sortByDescending {
+                    it.optionListItem.last()?.intr_rate!!
+                }
                 _despositList.postValue(it)
             }
         }

@@ -9,29 +9,39 @@ import com.universeindustry.governmentinfo.databinding.HolderBankDespositBinding
 import com.universeindustry.governmentinfo.online.retrofit.API
 import com.universeindustry.governmentinfo.online.retrofit.model.BankDespositModelTree
 import com.universeindustry.governmentinfo.views.recyclerview.IClickListener
-import com.universeindustry.governmentinfo.views.base.BaseDiffUtil
+import com.universeindustry.governmentinfo.views.fragments.bank.recyclerview.ChartDeposit.AdapterDeposit
 
 
-class BankAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterTypeBank : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var customList : ArrayList<Any>? = arrayListOf()
+    private var depositList : ArrayList<BankDespositModelTree>? = arrayListOf()
     private var fragmentType : String? = null
-    fun setRecyclerviewType(get : String, newList : List<Any>){
+    fun setDepositList(get : String, newList : ArrayList<BankDespositModelTree>){
         // 타입 업데이트
         this.fragmentType = get
 
         // 리스트 업데이트
-        val diffResult = DiffUtil.calculateDiff(BaseDiffUtil(
-                customList ?: arrayListOf(),
-                newList,
-                get), false)
-        diffResult.dispatchUpdatesTo(this@BankAdapter)
-        customList?.clear()
-        customList?.addAll(newList)
+        val diffResult = DiffUtil.calculateDiff(
+                DiffUtilBank(
+                        oldList = depositList ?: arrayListOf(),
+                        currentList = newList
+                ), false)
+        diffResult.dispatchUpdatesTo(this@AdapterTypeBank)
+        depositList?.let {
+            it.clear()
+            it.addAll(newList)
+        }
     }
 
     private var iClickListener : IClickListener? = null
     fun setClickListener(get : IClickListener?){ this.iClickListener = get }
+
+    private var adapterDeposit : AdapterDeposit? = null
+    init {
+        adapterDeposit = AdapterDeposit().apply {
+            setList(arrayListOf())
+        }
+    }
 
     private val typeDesposit : Int = 0
     private val typeSaving : Int = 1
@@ -39,30 +49,32 @@ class BankAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val bankDespositBinding = HolderBankDespositBinding.inflate(layoutInflater, parent, false)
-
         return when(viewType){
-            typeDesposit -> DespositHolder(bankDespositBinding, iClickListener!!)
-            typeSaving -> DespositHolder(bankDespositBinding, iClickListener!!)
-            typeAnnuitySaving -> DespositHolder(bankDespositBinding, iClickListener!!)
-            else -> DespositHolder(bankDespositBinding, iClickListener!!)
+            typeDesposit -> {
+                HolderTypeDeposit(bankDespositBinding, iClickListener!!)
+            }
+            typeSaving -> HolderTypeDeposit(bankDespositBinding, iClickListener!!)
+            typeAnnuitySaving -> HolderTypeDeposit(bankDespositBinding, iClickListener!!)
+            else -> HolderTypeDeposit(bankDespositBinding, iClickListener!!)
         }
     }
 
     override fun getItemCount(): Int {
         return when(fragmentType){
-            API.desposit -> customList?.size ?: 0
-            API.saving -> customList?.size ?: 0
-            API.annuitySaving -> customList?.size ?: 0
-            else -> customList?.size ?: 0
+            API.desposit -> depositList?.size ?: 0
+            API.saving -> depositList?.size ?: 0
+            API.annuitySaving -> depositList?.size ?: 0
+            else -> depositList?.size ?: 0
         }
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is DespositHolder -> {
-                val dataList = customList!![position]
+            is HolderTypeDeposit -> {
+                val dataList = depositList!![position]
                 holder.dataBinding(
-                        model = dataList as BankDespositModelTree
+                        model = dataList
                 )
+                adapterDeposit?.setList(dataList.optionListItem)
             }
             else -> {
                 val exception = Exception()
@@ -72,7 +84,7 @@ class BankAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
     override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
         when(holder){
-            is DespositHolder -> {
+            is HolderTypeDeposit -> {
                 holder.dataBinding(
                         model = null
                 )

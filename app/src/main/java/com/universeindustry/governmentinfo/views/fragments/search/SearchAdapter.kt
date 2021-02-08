@@ -18,12 +18,17 @@ class SearchAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var customList : ArrayList<Any>? = arrayListOf()
     private var fragmentType : String? = null
-    fun setFragmentType(get : String, newList : List<Any>){
+    fun setFragmentType(get : String, newList : ArrayList<Any>){
         // 타입 업데이트
         this.fragmentType = get
 
         // 리스트 업데이트
-        val diffResult = DiffUtil.calculateDiff(BaseDiffUtil(customList ?: arrayListOf(), newList, get), false)
+        val diffResult = DiffUtil.calculateDiff(
+                BaseDiffUtil(
+                        oldList = customList ?: arrayListOf(),
+                        currentList = newList,
+                        type = get
+                ), false)
         diffResult.dispatchUpdatesTo(this@SearchAdapter)
         customList?.clear()
         customList?.addAll(newList)
